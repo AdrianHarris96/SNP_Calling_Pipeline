@@ -20,8 +20,8 @@ do
     h) printf "This is a script for SNP-calling.\nThe -a, -b, -r, -f, and -o flags require read1 (<read1.fq>), read2 (<read2.fq>), the reference sequence (<ref.fa>), the location of the Mills file (</Location>), and the desired name for the output .bed file.\nFurthermore, you can perform the read realignment by invoking the optional -e flag.\nThe optional -z flag will gunzip the output .vcf file.\nThe optional -v flag allows the user to trace through the script in realtime.\nThe optional -i flag will index the BAM file, following realignment." 
   esac
 done
-#An alternative program exists using a -j flag for java on my system considering I had to tell my system which version of java to use. With this script, be sure that java8 is in use or the user will receive a malformed error during realignment. 
-# Be sure that the reads, reference genome and GenomeAnalysisTK.jar are in the directory you will be working in.
+#An alternative program exists using a -j flag to specify the path to java8. The user will receive a malformed error during realignment if the java8 is not in use. 
+#Be sure that the reads, reference genome and GenomeAnalysisTK.jar are in the current working directory. 
 
 if [ $v -eq 1 ]; then
   set -x
@@ -99,7 +99,7 @@ else
 fi
 #This will either realign the indexed bam file or realign the raw bam file in unsafe mode. 
 #The two GATK logs created for each step are concatenated to form one GATK log. 
- #The other steps would like the user to check each lane for duplicates and merge the different lanes into library.bam. This library.bam will then be combined with other library.bam files to create a sample.bam file. With the current setup, we have only created 1 lane.bam, so going through the process of inputting into MarkDuplicates to output as a library to then be merged into a sample really does not make sense. 
+#The other steps would like the user to check each lane for duplicates and merge the different lanes into library.bam. This library.bam will then be combined with other library.bam files to create a sample.bam file. With the current setup, we have only created 1 lane.bam, so going through the process of inputting into MarkDuplicates to output as a library to then be merged into a sample really does not make sense. 
 
 if [ $v -eq 1 ]; then
   set -x
@@ -120,6 +120,7 @@ fi
 bcftools mpileup -Ob -o $output_raw.bcf -f $ref lane_final.bam
 
 bcftools call -vmO z -o $output.vcf.gz $output_raw.bcf
+#Creation of variant calling file (as a compressed file by default)
 
 if [ $gunzip -eq 1 ]; then 
   echo "$output.vcf.gz is ready."
