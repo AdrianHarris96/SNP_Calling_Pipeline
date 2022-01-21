@@ -1,5 +1,7 @@
 #This is a script for SNP-calling.
 
+Detailed explanation of script can be found here: https://www.htslib.org/workflow/wgs-call.html
+
 The -a, -b, -r, -f, and -o flags require read1 (<read1.fq>), read2 (<read2.fq>), the reference sequence (<ref.fa>), the location of the Mills file (</Location>), and the desired name for the output .bed file, respectively. 
 
 Furthermore, you can perform the read realignment by invoking the optional -e flag.
