@@ -1,4 +1,4 @@
-#This is a script for SNP-calling.
+SNP-Calling Pipeline using BWA, GATK, Samtools and VCFtools
 
 Detailed explanation of script can be found here: https://www.htslib.org/workflow/wgs-call.html
 
