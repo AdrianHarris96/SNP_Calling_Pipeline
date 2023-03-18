@@ -1,4 +1,4 @@
-SNP-Calling Pipeline using BWA, GATK, Samtools and VCFtools
+SNP-Calling Pipeline using BWA, GATK, Samtools and BCFtools
 
 Detailed explanation of script can be found here: https://www.htslib.org/workflow/wgs-call.html
 
